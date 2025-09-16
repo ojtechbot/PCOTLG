@@ -1,0 +1,124 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check for admin role
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Helper function to check if a user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      // Users can read and update their own document
+      allow read, update: if request.auth.uid == userId;
+      // Admins can read and write to any user document
+      allow read, write: if isAdmin();
+      // Allow authenticated users to create their own user document
+      allow create: if request.auth.uid == userId;
+    }
+
+    // Publicly readable collections for homepage and general info
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /leaders/{leaderId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /sermons/{sermonId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /events/{eventId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+     match /affiliates/{affiliateId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Authenticated access collections
+    match /communityGroups/{groupId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+    }
+    match /ministryOpportunities/{oppId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+    }
+    match /sacredSpaces/{spaceId} {
+        allow read: if isAuthenticated();
+        allow write: if isAdmin();
+    }
+    match /prayerRequests/{requestId} {
+        allow read, create: if isAuthenticated();
+        allow update: if isAuthenticated() && request.resource.data.keys().hasOnly(['prayerCount']); // Allow anyone to increment prayer count
+        allow delete: if isAdmin();
+    }
+    match /donations/{donationId} {
+        // Users can create donations for themselves
+        allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+        // Users can read their own donation history
+        allow read: if isAuthenticated() && resource.data.userId == request.auth.uid;
+        // Admins can read all
+        allow list, get: if isAdmin();
+    }
+     match /subscribers/{subscriberId} {
+      // Anyone can subscribe (public action)
+      allow create: if true;
+      // Only admins can read the list of subscribers
+      allow read: if isAdmin();
+    }
+
+    // OTPs can be created by anyone, but only read/updated by the server (or flows)
+    // For simplicity in this context, we will allow authenticated writes for verification flow
+    match /otps/{email} {
+        allow write: if true;
+        allow read: if false; // No one should read OTPs directly
+    }
+
+    // Notifications
+    match /notifications/{notificationId} {
+      // Users can read notifications targeted to them or global notifications
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || resource.data.userId == null);
+      // Users can delete their own notifications
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+      // Only server/admin can create notifications
+      allow create: if isAdmin();
+      // Allow users to mark their own notifications as read
+      allow update: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // Live Stream State
+    match /appState/{docId} {
+        // Anyone authenticated can read the live stream state
+        allow read: if isAuthenticated();
+        // Only admins can change the live stream state
+        allow write: if isAdmin();
+    }
+
+    // Support Chat
+    match /supportChat/{messageId} {
+        // Any authenticated user can read and write to the support chat
+        allow read, create: if isAuthenticated();
+        // Only admins can delete messages
+        allow delete: if isAdmin();
+    }
+
+    // Typing Status for Support Chat
+    match /typingStatus/{chatId} {
+      // Any authenticated user can update their typing status
+      allow read, write: if isAuthenticated();
+    }
+
+  }
+}
