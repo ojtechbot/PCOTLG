@@ -1,4 +1,4 @@
-name: Deploy Next.js app to Firebase Hosting
+name: Deploy Next.js Webapp to Firebase Hosting
 
 on:
   push:
