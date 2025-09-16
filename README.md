@@ -33,3 +33,51 @@ SMTP_PORT=465
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-gmail-app-password
 SMTP_FROM_NAME="PCOTLG App"
+
+☁️ Deployed Application (Firebase Secret Manager)
+
+Your deployed application uses the apphosting.yaml file to safely access environment variables via Firebase Secret Manager. You must create these secrets in your Firebase project for the deployed app to work correctly.
+
+📝 To create secrets:
+
+1. ⚙️ Go to your Firebase Project Settings.
+
+
+2. 📊 Navigate to the Dashboard section of App Hosting.
+
+
+3. 🔒 Click Manage on your App Hosting backend.
+
+
+4. 🛠 Go to the Settings tab.
+
+
+5. ➕ In the Secrets section, click Create secret for each variable listed in apphosting.yaml.
+
+
+
+Secrets you need to create:
+
+🔑 FIREBASE_SERVICE_ACCOUNT_JSON
+
+🌐 NEXT_PUBLIC_APP_URL (your production URL)
+
+🔥 NEXT_PUBLIC_FIREBASE_PROJECT_ID
+
+📲 NEXT_PUBLIC_FIREBASE_VAPID_KEY
+
+📧 SMTP_HOST
+
+📮 SMTP_PORT
+
+👤 SMTP_USER
+
+🔐 SMTP_PASS
+
+🏷 SMTP_FROM_NAME
+
+
+After creating the secrets, 🚢 re-deploy your application for the changes to take effect.
+
+Do you also want me to add **badges (shields.io)** at the very top (for Next.js, Firebase, License, etc.) so it looks like a polished open-source project?
+
