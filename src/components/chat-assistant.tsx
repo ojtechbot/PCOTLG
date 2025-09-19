@@ -2,7 +2,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { MessageSquare, Loader2, Plus, Send, X, ArrowDown } from "lucide-react"
+import { MessageSquare, Loader2, Plus, Send, X, ArrowDown, Copy } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -29,6 +29,7 @@ import remarkGfm from 'remark-gfm';
 import { Badge } from "./ui/badge"
 import { cn } from "@/lib/utils"
 import { useSound } from "@/hooks/use-sound"
+import { useToast } from "@/hooks/use-toast"
 
 
 const initialMessage: Message = {
@@ -54,6 +55,7 @@ export function ChatAssistant() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [showScrollToBottom, setShowScrollToBottom] = useState(false);
   const { playSound } = useSound();
+  const { toast } = useToast();
 
 
   // Load chat history from localStorage on initial render
@@ -168,6 +170,14 @@ export function ChatAssistant() {
       setShowSuggestion(false);
     }
   }
+  
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    toast({
+        title: "Copied to clipboard!",
+        duration: 2000,
+    });
+  }
 
   return (
     <TooltipProvider>
@@ -231,7 +241,7 @@ export function ChatAssistant() {
                         {messages.map((message, index) => (
                             <div
                             key={index}
-                            className={cn('flex items-end gap-2',
+                            className={cn('group flex items-end gap-2',
                                 message.role === 'user' ? 'justify-end' : 'justify-start'
                             )}
                             >
@@ -242,12 +252,15 @@ export function ChatAssistant() {
                                 </Avatar>
                             )}
                             <div
-                                className={cn('rounded-lg px-3 py-2 max-w-[85%] text-sm prose dark:prose-invert prose-p:my-0 prose-headings:my-2',
+                                className={cn('relative rounded-lg px-3 py-2 max-w-[85%] text-sm prose dark:prose-invert prose-p:my-0 prose-headings:my-2',
                                 message.role === "user"
                                     ? "bg-primary text-primary-foreground rounded-br-none"
                                     : "bg-muted text-muted-foreground rounded-bl-none"
                                 )}
                             >
+                                <Button variant="ghost" size="icon" className="absolute top-0 right-0 h-6 w-6 text-current opacity-0 group-hover:opacity-50 hover:opacity-100 transition-opacity" onClick={() => handleCopy(message.content)}>
+                                    <Copy className="h-3 w-3" />
+                                </Button>
                                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                                   {message.content}
                                 </ReactMarkdown>
@@ -313,3 +326,5 @@ export function ChatAssistant() {
     </TooltipProvider>
   )
 }
+
+    
