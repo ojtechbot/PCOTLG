@@ -171,7 +171,7 @@ export function ChatAssistant() {
 
   return (
     <TooltipProvider>
-      <div className="fixed bottom-24 right-6 z-50 flex items-end gap-2">
+      <div className="fixed bottom-6 right-6 z-50 flex items-end gap-2">
         {!isOpen && showSuggestion && (
             <div className="relative animate-in fade-in-50 slide-in-from-bottom-2 duration-500 opacity-100 transition-opacity">
                  <div className="absolute top-1 right-1 w-2.5 h-2.5 bg-primary rounded-full animate-ping"></div>

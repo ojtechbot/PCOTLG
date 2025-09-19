@@ -36,7 +36,7 @@ export function GoToTop() {
       size="icon"
       variant="outline"
       className={cn(
-        "fixed bottom-6 right-6 z-50 rounded-full w-14 h-14 shadow-lg transition-opacity duration-300",
+        "fixed bottom-24 right-6 z-50 rounded-full w-14 h-14 shadow-lg transition-opacity duration-300",
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       )}
       onClick={scrollToTop}
