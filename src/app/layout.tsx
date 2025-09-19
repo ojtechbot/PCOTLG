@@ -1,5 +1,4 @@
 
-"use client"
 import type { Metadata } from 'next';
 import { Toaster } from "@/components/ui/toaster"
 import './globals.css';
@@ -26,6 +25,17 @@ const ebGaramond = EB_Garamond({
   variable: '--font-eb-garamond',
 })
 
+export const metadata: Metadata = {
+  title: 'Pentecostal Church of the Living God',
+  description: 'A place for faith-based connection, growth, and community engagement.',
+  keywords: 'church, pentecostal, community, faith, God, Jesus, Bible, worship, PCOTLG',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
+  themeColor: '#ffffff',
+};
 
 export default function RootLayout({
   children,
@@ -35,16 +45,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Pentecostal Church of the Living God</title>
-        <meta name="description" content="A place for faith-based connection, growth, and community engagement." />
-        <meta name="keywords" content="church, pentecostal, community, faith, God, Jesus, Bible, worship, PCOTLG" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/images/logo.png"></link>
-        <meta name="theme-color" content="#ffffff" />
-      </head>
+      <head />
       <body className={cn("font-body antialiased", inter.variable, notoSerif.variable, ebGaramond.variable)}>
         <ThemeProvider
           attribute="class"
