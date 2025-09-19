@@ -1,22 +1,22 @@
-
 {
-    "name": "Pentecostal Church of the Living God",
-    "short_name": "PCOTLG",
-    "description": "A place for faith-based connection and growth.",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#D94141",
-    "icons": [
-        {
-            "src": "/images/logo-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/images/logo-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "name": "Pentecostal Church of the Living God",
+  "short_name": "PCOTLG",
+  "description": "A place for faith-based connection, growth, and community engagement.",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "start_url": "/home",
+  "display": "standalone",
+  "orientation": "portrait"
 }
