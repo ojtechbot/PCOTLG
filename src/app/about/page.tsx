@@ -75,7 +75,7 @@ function AboutPageContent() {
       {/* Hero Section */}
       <section className="relative bg-secondary/30 py-20 md:py-32">
         <div className="absolute inset-0">
-          <Image src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-3.png" alt="Church building" fill className="object-cover opacity-10" data-ai-hint="church building" />
+          <Image src="/images/congregation.jpg" alt="Church building" fill className="object-cover opacity-10" data-ai-hint="church building" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
         </div>
         <div className="container mx-auto px-4 relative text-center">

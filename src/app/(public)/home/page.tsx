@@ -25,10 +25,10 @@ import { SermonsCarousel } from "@/components/sermons-carousel";
 import { ContactUsForm } from "@/components/contact-us-form";
 
 const galleryImages = [
-    { src: "https://placehold.co/400x400.png", alt: "", hint: "community event" },
-    { src: "https://placehold.co/400x400.png", alt: "Worship service", hint: "worship service" },
-    { src: "https://placehold.co/400x400.png", alt: "Youth group activity", hint: "youth group" },
-    { src: "https://placehold.co/400x400.png", alt: "Church building exterior", hint: "church building" },
+    { src: "/images/e1.jpeg", alt: "", hint: "community event" },
+    { src: "/images/e2.jpeg", alt: "Worship service", hint: "worship service" },
+    { src: "/images/e3.jpeg", alt: "Youth group activity", hint: "youth group" },
+    { src: "/images/e4.jpeg", alt: "Church building exterior", hint: "church building" },
 ];
 
 async function getHomepageData() {
