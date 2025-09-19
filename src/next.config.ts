@@ -1,4 +1,3 @@
-
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
@@ -49,9 +48,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    turbopack: true,
-  },
+  experimental: {},
   webpack: (config, { isServer }) => {
     // This is to prevent a warning about a module not being found in the FCM SDK.
     // It's a known issue when using FCM with server-side rendering.
