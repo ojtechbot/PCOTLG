@@ -16,6 +16,7 @@ import {
   Book,
   BookMarked,
   MessageSquare,
+  Signal,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -48,6 +49,7 @@ import { GoToTop } from "./go-to-top";
 const navItems = [
     { href: "/home", icon: Home, label: "Home" },
     { href: "/about", icon: Info, label: "About" },
+    { href: "/live", icon: Signal, label: "Live" },
     { href: "/teachings", icon: Book, label: "Teachings & Articles" },
     { href: "/media", icon: Clapperboard, label: "Media Hub" },
     { href: "/events", icon: Calendar, label: "Events & Pages" },
@@ -225,5 +227,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+    
 
     
